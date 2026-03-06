@@ -1,0 +1,34 @@
+.container-sidebar {
+  width: 250px;
+  background-color: var(--color-primary);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-button {
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin: 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+.sidebar-button:hover {
+  background-color: var(--color-background);
+}
+
+.sidebar-button.active {
+  background-color: var(--color-primary-hover);
+  color: rgb(255, 255, 255);
+}
+
+.container-sidebar__sidebar-title {
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+}

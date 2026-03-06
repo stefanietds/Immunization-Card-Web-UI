@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #f6faff;
+  --color-primary-hover: #0b7da8;
+  --color-background: #e4e4e4;
+  --color-surface: #1e293b;
+  --color-card: #ffffff;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cbd5f5;
+  --color-text-muted: #94a3b8;
+  --color-success: #22c55e;
+  --color-warning: #facc15;
+  --color-error: #ef4444;
+  --color-border: #475569;
+}
