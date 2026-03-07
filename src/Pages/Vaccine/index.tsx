@@ -4,23 +4,12 @@ import Sidebar from "../../Components/Sidebar";
 import DataTable from "../../Components/DataTable";
 import "./index.css";
 import type { Vaccine } from "../../types";
+import { VaccineColumns } from "../../../constant";
 
 const Vaccine = () => {
   const [form] = Form.useForm();
   const [dataSource, setDataSource] = useState<Vaccine[]>([]);
 
-  const columns = [
-    {
-      title: "Nome da Vacina",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Código",
-      dataIndex: "code",
-      key: "code",
-    },
-  ];
 
   const onFinish = (values: { name: string; code: string }) => {
     console.log("Received values:", values);
@@ -65,7 +54,7 @@ const Vaccine = () => {
           <div className="table-section">
             <DataTable
               dataSource={dataSource}
-              columns={columns}
+              columns={VaccineColumns}
             />
           </div>
         </div>

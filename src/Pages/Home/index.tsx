@@ -4,23 +4,12 @@ import Sidebar from "../../Components/Sidebar";
 import DataTable from "../../Components/DataTable";
 import "./index.css";
 import type { Person } from "../../types";
+import { PersonColumns } from "../../../constant";
 
 const Home = () => {
   const [form] = Form.useForm();
   const [dataSource, setDataSource] = useState<Person[]>([]);
 
-  const columns = [
-    {
-      title: "CPF",
-      dataIndex: "cpf",
-      key: "cpf",
-    },
-    {
-      title: "Nome",
-      dataIndex: "name",
-      key: "name",
-    },
-  ];
 
   const onFinish = (values: { cpf: string; name: string }) => {
     console.log("Received values:", values);
@@ -65,7 +54,7 @@ const Home = () => {
           <div className="container-home-content__table-section">
             <DataTable
               dataSource={dataSource}
-              columns={columns}
+              columns={PersonColumns}
             />
           </div>
         </div>

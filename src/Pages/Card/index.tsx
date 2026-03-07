@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Table, Button, Space, Modal } from "antd";
+import { Button, Space, Modal } from "antd";
 import Sidebar from "../../Components/Sidebar";
 import ModalCardDetails from "../../Components/Modal";
 import "./index.css";
 import type { Person } from "../../types";
 import DataTable from "../../Components/DataTable";
+import { PersonColumns } from "../../../constant";
 
 const Card = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -12,18 +13,6 @@ const Card = () => {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
   const [dataSource, setDataSource] = useState<Person[]>([]);
 
-  const columns = [
-    {
-      title: "CPF",
-      dataIndex: "cpf",
-      key: "cpf",
-    },
-    {
-      title: "Nome",
-      dataIndex: "name",
-      key: "name",
-    },
-  ];
 
   const handleViewDetails = () => {
     if (selectedRowKeys.length === 0) return;
@@ -80,7 +69,7 @@ const Card = () => {
 
         <DataTable
           dataSource={dataSource}
-          columns={columns}
+          columns={PersonColumns}
           className="container-vaccine-content__card-table"
         />
 
