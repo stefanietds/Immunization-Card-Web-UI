@@ -4,16 +4,16 @@
 ## Arquitetura de Pastas
 
 src/
-├─ Api/               # Chamadas HTTP para backend
-├─ Components/        # Componentes reutilizáveis
-├─ Pages/             # Páginas do sistema
-│  ├─ Home/
-│  ├─ Vaccine/
-│  └─ Card/
-├─ types/             # Tipagens TypeScript
-├─ utils/             # Funções utilitárias 
-├─ App.tsx
-├─ main.tsx
+├─ Api/ # Chamadas HTTP para backend
+├─ Components/ # Componentes reutilizáveis
+├─ Pages/ # Páginas do sistema
+│ ├─ Home/ # Cadastro de pessoas
+│ ├─ Vaccine/ # Cadastro de vacinas
+│ └─ Card/ # Gerenciamento de cartões de vacinação
+├─ types/ # Tipagens TypeScript
+├─ utils/ # Funções utilitárias
+├─ App.tsx # Componente principal
+├─ main.tsx # Ponto de entrada do React
 
 ## Funcionalidades
 
