@@ -10,18 +10,22 @@ export type Vaccine = {
   code: string;
 }
 
-export type ImmunizationRecord = {
-  id: number;
-  personId: number;
+type Dose = {
+  cardId: number;
   vaccineId: number;
-  date: Date;
-  dose?: number;
-  notes?: string;
-}
+  vaccineName: string;
+  doseNumber: number;
+  date: string;
+};
 
-export type ImmunizationCard = {
-  id: number;
-  personId: number;
-  person: Person;
-  records: ImmunizationRecord[];
-}
+type PersonWithDoses = {
+  patientId: number;
+  patientName: string;
+  doses: Dose[];
+};
+
+export type ApiResponse<T> = {
+  success: boolean;
+  data: T;
+  message: string;
+};

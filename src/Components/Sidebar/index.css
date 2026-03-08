@@ -1,9 +1,27 @@
 .container-sidebar {
   width: 250px;
-  background-color: var(--color-primary);
+  background-color: var(--color-text-primary);
   border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
+}
+
+.container-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-logo {
+  object-fit: contain;
+}
+
+.container-sidebar__sidebar-title {
+  font-weight: bold;
+  margin: 0;
+  color: var(--color-primary-hover);
 }
 
 .sidebar-button {
@@ -25,10 +43,4 @@
 .sidebar-button.active {
   background-color: var(--color-primary-hover);
   color: rgb(255, 255, 255);
-}
-
-.container-sidebar__sidebar-title {
-  font-weight: bold;
-  padding: 20px;
-  text-align: center;
 }

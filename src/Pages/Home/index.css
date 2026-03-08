@@ -11,24 +11,9 @@
 
 .container-home-content h1 {
   margin-top: 0;
-  margin-bottom: 30px;
   font-size: 28px;
 }
 
-.container-home-content__content-wrapper {
-  display: flex;
-  gap: 30px;
-}
-
-.container-home-content__form-section {
-  flex: 0 0 300px;
-  background-color: var(--color-card);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-}
-
-.container-home-content__table-section {
-  flex: 1;
-  border-radius: 8px;
+.container-home-content h3 {
+  color: #6c757d;
 }

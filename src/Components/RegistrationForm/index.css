@@ -1,0 +1,27 @@
+.container-form {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.inline-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.input-cpf {
+  min-width: 180px;
+}
+
+.input-name {
+  min-width: 450px;
+}
+
+.button {
+  height: 32px;
+}
+
+.button:hover {
+  background-color: var(--color-background) !important;
+  color: black !important;
+}
