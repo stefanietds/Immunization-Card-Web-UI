@@ -60,7 +60,7 @@ const Vaccine = () => {
           onFinish={onFinish}
         />
         <div className="container-vaccine-content__table-section">
-          <DataTable dataSource={dataSource} columns={VaccineColumns} />
+          <DataTable dataSource={dataSource} columns={VaccineColumns} pagination={false} />
         </div>
       </div>
     </div>

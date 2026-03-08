@@ -85,6 +85,7 @@ const Home = () => {
           <DataTable
             dataSource={dataSource}
             columns={PersonColumns(handleDelete)}
+            pagination={false} 
           />
         </div>
       </div>

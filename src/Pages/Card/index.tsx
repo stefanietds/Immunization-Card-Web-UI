@@ -117,6 +117,7 @@ const Card = () => {
           columns={CardColumns(handleDetails)}
           rowKey={(record) => record.patientId}
           className="container-vaccine-content__card-table"
+          pagination={false} 
         />
       </div>
       {isModalVisible && selectedPerson ? (
