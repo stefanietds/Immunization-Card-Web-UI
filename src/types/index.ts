@@ -10,6 +10,12 @@ export type Vaccine = {
   code: string;
 }
 
+export type ImmunizationCard = {
+  patientId: number;
+  patientName: string;
+  doses: Dose[];
+};
+
 type Dose = {
   cardId: number;
   vaccineId: number;

@@ -1,0 +1,17 @@
+
+.container-modal .ant-modal-title {
+  color:  var(--color-primary-hover);
+}
+
+.container-modal .ant-modal-content {
+  background-color: var(--color-text-primary);
+}
+
+.container-modal h3 {
+  color: var(--color-primary-hover);
+  text-align: center;
+}
+
+.container-modal .ant-table-thead > tr > th {
+  color: var(--color-primary-hover);
+}

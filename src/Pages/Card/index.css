@@ -14,11 +14,6 @@
   font-size: 28px;
 }
 
-.container-card-content__card-actions {
-  margin-bottom: 20px;
-}
-
 .container-vaccine-content__card-table {
-  background-color: var(--color-surface);
   border-radius: 8px;
 }

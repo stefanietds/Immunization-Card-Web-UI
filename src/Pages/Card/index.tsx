@@ -1,84 +1,132 @@
-import { useState } from "react";
-import { Button, Space, Modal } from "antd";
+import { useEffect, useState } from "react";
 import Sidebar from "../../Components/Sidebar";
-import ModalCardDetails from "../../Components/Modal";
+import ModalCardDetails from "../../Components/ModalCardDetails";
 import "./index.css";
-import type { Person } from "../../types";
+import type { PersonWithDoses, Person } from "../../types";
 import DataTable from "../../Components/DataTable";
-import { PersonColumns } from "../../../constant";
+import { CardColumns } from "../../../constant";
+import ImmunizationForm from "../../Components/ImmunizationForm";
+import { Form, message } from "antd";
+import {
+  createCard,
+  deleteCard,
+  getAllCards,
+  getImmunizationCardByPatient,
+} from "../../Api/handlers/cardHandler";
 
 const Card = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
+  const [selectedPerson, setSelectedPerson] = useState<PersonWithDoses | null>(
+    null,
+  );
   const [dataSource, setDataSource] = useState<Person[]>([]);
 
-
-  const handleViewDetails = () => {
-    if (selectedRowKeys.length === 0) return;
-    console.log("view details", selectedRowKeys);
+  const fetchData = async () => {
+    try {
+      const data = await getAllCards();
+      console.log("Dados recebidos:", data.data);
+      setDataSource(data.data);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
   };
 
-  const handleDelete = () => {
-    if (selectedRowKeys.length === 0) return;
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    Modal.confirm({
-      title: "Confirmar deleção",
-      content: "Tem certeza que deseja deletar este cartão?",
-      okText: "Deletar",
-      cancelText: "Cancelar",
-      okButtonProps: { danger: true },
-      onOk() {
-        console.log("delete", selectedRowKeys);
-      },
-      onCancel() {
-        console.log("cancel delete");
-      },
-    });
+  const handleDetails = async (patientId: number) => {
+    try {
+      const response = await getImmunizationCardByPatient(patientId);
+      setSelectedPerson(response.data);
+      setIsModalVisible(true);
+    } catch (error) {
+      console.error("Erro ao buscar cartão de vacinação:", error);
+      messageApi.open({
+        type: "error",
+        content: "Erro ao buscar cartão de vacinação",
+      });
+    }
   };
 
-  const handleCloseModal = () => {
-    setIsModalVisible(false);
-    setSelectedPerson(null);
+  const onFinish = async (values: {
+    patient: number;
+    vaccine: number;
+    dose: number;
+  }) => {
+    try {
+      const payload = {
+        patientId: values.patient,
+        vaccineId: values.vaccine,
+        dose: values.dose,
+      };
+      const response = await createCard(payload);
+      if (response.success === true || response.data === true) {
+        messageApi.open({
+          type: "success",
+          content: "Vacinação adicionada com sucesso!",
+        });
+        fetchData();
+        form.resetFields();
+      }
+    } catch (error) {
+      console.error("Erro ao criar vacinação:", error);
+      messageApi.open({
+        type: "error",
+        content: "Erro ao criar vacinação",
+      });
+    }
+  };
+
+  const handleDeleteDose = async (cardId: number) => {
+    try {
+      const response = await deleteCard(cardId);
+      if (response.success === true) {
+        messageApi.open({
+          type: "success",
+          content: "Dose deletada com sucesso!",
+        });
+
+        if (selectedPerson) {
+          setSelectedPerson({
+            ...selectedPerson,
+            doses: selectedPerson.doses.filter((d) => d.cardId !== cardId),
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao deletar dose:", error);
+      messageApi.open({
+        type: "error",
+        content: "Erro ao deletar dose",
+      });
+    }
   };
 
   return (
     <div className="container-card">
+      {contextHolder}
       <Sidebar />
       <div className="container-card-content">
         <h1>Cartões de Vacinação</h1>
-
-        <div className="container-card-content__card-actions">
-          <Space>
-            <Button
-              type="primary"
-              onClick={handleViewDetails}
-              disabled={selectedRowKeys.length === 0}
-            >
-              Ver Detalhes
-            </Button>
-            <Button
-              danger
-              onClick={handleDelete}
-              disabled={selectedRowKeys.length === 0}
-            >
-              Deletar
-            </Button>
-          </Space>
-        </div>
-
+        <ImmunizationForm form={form} onFinish={onFinish} />
         <DataTable
           dataSource={dataSource}
-          columns={PersonColumns}
+          columns={CardColumns(handleDetails)}
+          rowKey={(record) => record.patientId}
           className="container-vaccine-content__card-table"
         />
-
+      </div>
+      {isModalVisible && selectedPerson ? (
         <ModalCardDetails
           visible={isModalVisible}
           person={selectedPerson}
-          onClose={handleCloseModal}
+          onClose={() => setIsModalVisible(false)}
+          handleDeleteDose={handleDeleteDose}
         />
-      </div>
+      ) : null}
     </div>
   );
 };

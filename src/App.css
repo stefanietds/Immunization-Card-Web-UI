@@ -5,8 +5,8 @@
 }
 
 :root {
-  --color-primary: #f6faff;
-  --color-primary-hover: #0b7da8;
+  --color-primary: #FAFAFA;
+  --color-primary-hover: #059669;
   --color-background: #e4e4e4;
   --color-surface: #1e293b;
   --color-card: #ffffff;
@@ -17,4 +17,9 @@
   --color-warning: #facc15;
   --color-error: #ef4444;
   --color-border: #475569;
+}
+
+.ant-btn-primary {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-success);
 }
